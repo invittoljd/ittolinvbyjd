@@ -1,0 +1,20 @@
+<main class="container">
+    <div class="col-12">
+        <div class="custom-header p-5 rounded mt-3">
+            <p class="title fw-bold text-center">Solicitudes</p>
+        </div>
+    </div>
+    <div class="col-12">
+        
+    </div>
+    <!-- Sección de Cards -->
+    <div class="col-12">
+        <div class="row">
+            <app-request-cards [requests]="requests" (requestSelectedEvent)="setRequestSelected($event)"/>
+        </div>
+    </div>
+</main>
+
+<app-item-information [itemSelected]="requestSelected?.item" />
+<app-request-delete [requests]="requests" [requestSelected]="requestSelected" />
+<app-request-warning [requestSelected]="requestSelected" />

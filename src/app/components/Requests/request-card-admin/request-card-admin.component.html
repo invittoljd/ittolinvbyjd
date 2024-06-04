@@ -1,0 +1,77 @@
+<div class="card mt-3">
+    <div class="card-header">
+        <p class="my-2"><span class="fw-bold">ID de la solicitud: </span>{{request?._id}}</p>
+    </div>
+    <div class="card-body">
+        <div class="mb-3 text-center">
+            <label for="title" class="fw-bold text-danger">Usuario solicitante</label>
+            <p id="title" class="h1 text-danger">
+                {{request?.username}}
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="fw-bold">Nombre del Item</label>
+            <p id="title">
+                {{request?.item?.title}}
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="fw-bold">Cantidad solicitada</label>
+            <p id="quantity">
+                {{request?.quantity}}
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="fw-bold">Fecha de la solicitud</label>
+            <p id="date">
+                {{getDate()}}
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="fw-bold">Descripción de la solicitud</label>
+            <p id="description">
+                {{request?.description}}
+            </p>
+        </div>
+        <div class="mb-3" *ngIf="request?.item?.loan">
+            <label for="dateStart" class="fw-bold">Fecha de inicio de uso del equipo</label>
+            <p id="dateStart">
+                {{getDateStart()}}
+            </p>
+        </div>
+        <div class="mb-3" *ngIf="request?.item?.loan">
+            <label for="dateEnd" class="fw-bold">Fecha de termino de uso del equipo</label>
+            <p id="dateEnd">
+                {{getDateEnd()}}
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="fw-bold">Estatus de la solicitud</label>
+            <p id="status">
+                {{request?.status?'Aprovado':'Pendiente'}}
+            </p>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <button type="button" class="btn" title="Rechazar Solicitud"
+            (click)="setRequestSelected(request);setStatus(false, request);">
+            <img class="icon" src="assets/icons/reject.svg" alt="Rechazar">
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#modalDelete" type="button" class="btn"
+            title="Eliminar solicitud" (click)="setRequestSelected(request)">
+            <img class="icon" src="assets/icons/danger.svg" alt="Eliminar">
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#modalWarning" type="button" class="btn"
+            title="Reportar imprevisto con la solicitud" (click)="setRequestSelected(request)">
+            <img class="icon" src="assets/icons/warning.svg" alt="Advertencias">
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#modalInformation" type="button" class="btn"
+            title="Mostrar información del Item solicitado" (click)="setRequestSelected(request)">
+            <img class="icon" src="assets/icons/show.svg" alt="Mostrar">
+        </button>
+        <button type="button" class="btn" title="Aceptar Solicitud"
+            (click)="setRequestSelected(request);setStatus(true, request);">
+            <img class=" icon" src="assets/icons/ok.svg" alt="Aceptar">
+        </button>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.icon {
+    width: 2.5rem;
+}
+
+.danger:hover {
+    background-color: var(--background-color-4) !important;
+}
+
+.btn:hover {
+    background-color: var(--background-color-3);
+    border: dotted;
+}
+
+.ng-invalid.ng-touched {
+    border: solid 2px rgb(163, 43, 43) !important;
+}
+
+.ng-valid.ng-touched {
+    border: solid 2px rgb(43, 163, 79) !important;
+}

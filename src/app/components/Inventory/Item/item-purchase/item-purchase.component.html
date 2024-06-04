@@ -1,0 +1,50 @@
+<div class="modal fade" id="modalPurchase" tabindex="-1" aria-labelledby="modalPurchaseLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title fs-5 h1 ms-2" id="modalPurchaseLabel">Solicitar Item al/los Administrador(es)</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formItemPurchase" (ngSubmit)="itemPurchase()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="fw-bold" for="title">Nombre del Item:</label>
+                        <p id="title">
+                            {{itemSelected?.title}}
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label fw-bold">Stock disponible del Item:</label>
+                        <p id="stock">
+                            {{itemSelected?.stock}}
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label fw-bold">Cantidad a solicitar del Item</label>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <input [min]="0" formControlName="quantity" class="form-control" id="quantity"
+                                type="number" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-bold">Descripción de la solicitud</label>
+                        <input placeholder="La solicitud es para..." formControlName="description" class="form-control" id="description" type="text" />
+                    </div>
+                    <div class="mb-3" *ngIf="itemSelected?.loan">
+                        <label for="datetimeStart" class="form-label fw-bold">Fecha de inicio de uso del equipo</label>
+                        <input formControlName="datetimeStart" class="form-control" id="datetimeStart" type="datetime-local" />
+                    </div>
+                    <div class="mb-3" *ngIf="itemSelected?.loan">
+                        <label for="datetimeEnd" class="form-label fw-bold">Fecha de finalización de uso del equipo</label>
+                        <input formControlName="datetimeEnd" class="form-control" id="datetimeEnd" type="datetime-local" />
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button data-bs-dismiss="modal" type="submit" class="btn" title="Editar">
+                        <img class="icon" src="assets/icons/ok.svg" alt="">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

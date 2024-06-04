@@ -1,0 +1,17 @@
+<main class="container">
+    <div class="col-12">
+        <div class="custom-header p-5 rounded text-center mt-3">
+            <p class="title fw-bold">Áreas</p>
+        </div>
+    </div>
+    <!-- Sección de Cards -->
+    <div class="col-12">
+        <div class="row">
+            <app-area-cards [areas]="areas" (areaSelectedEvent)="setAreaSelected($event)" />
+        </div>
+    </div>
+</main>
+
+<app-area-add [areas]="areas" *ngIf="isAdmin()" />
+<app-area-edit [areas]="areas" [areaSelected]="areaSelected" *ngIf="isAdmin()" />
+<app-area-information [areaSelected]="areaSelected" />

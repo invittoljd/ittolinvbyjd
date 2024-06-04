@@ -1,0 +1,26 @@
+<main class="container d-flex justify-content-center align-items-center vh-100">
+    <form [formGroup]="formSignIn" class="p-5 form rounded" (submit)="signIn()">
+        <h1 class="text-center mb-4">Crear Nuevo Usuario</h1>
+        <div class="my-3">
+            <label for="user" class="form-label">Usuario</label>
+            <input formControlName="user" type="text" class="form-control" id="user" placeholder="Usuario">
+        </div>
+        <div class="my-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input formControlName="password" type="text" class="form-control" id="password" placeholder="********">
+        </div>
+        <div class="my-3">
+            <label for="type" class="form-label">Tipo de usuario</label>
+            <input formControlName="type" type="text" class="form-control" id="type" placeholder="1 - Admin, 2 - User">
+        </div>
+        <app-alert [alert]="alert"></app-alert>
+        <div class="row mt-5 justify-content-center">
+            <button type="submit" class="col-10 btn btn-lg btn-outline-primary btn-block">Enviar</button>
+        </div>
+        <div class="row mt-5 justify-content-center">
+            <button (click)="singOut()" routerLinkActive="router-link-active"  class="col-6 btn btn-lg btn-outline-danger btn-block">
+                Eliminar Usuario
+            </button>
+        </div>
+    </form>
+</main>

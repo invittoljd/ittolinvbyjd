@@ -1,0 +1,19 @@
+<main class="container">
+    <div class="col-12">
+        <div class="custom-header p-5 rounded text-center mt-3">
+            <p class="h4 fw-bold">{{areaSelected?.title}}</p>
+            <p class="title fw-bold">Categorías</p>
+        </div>
+    </div>
+    <!-- Sección de Cards -->
+    <div class="col-12">
+        <div class="row">
+            <app-category-cards [areaSelected]="areaSelected" [categories]="categories"
+                (categorySelectedEvent)="setCategorySelected($event)" />
+        </div>
+    </div>
+</main>
+
+<app-category-add [areaSelected]="areaSelected" *ngIf="isAdmin()" />
+<app-category-edit [areaSelected]="areaSelected" [categorySelected]="categorySelected" *ngIf="isAdmin()" />
+<app-category-information [categorySelected]="categorySelected" />

@@ -1,0 +1,23 @@
+<main class="container">
+    <div class="col-12">
+        <div class="custom-header p-5 rounded text-center mt-3">
+            <p class="h4 fw-bold">{{areaSelected?.title}}</p>
+            <p class="h4 fw-bold">{{categorySelected?.title}}</p>
+            <p class="title fw-bold">Inventario</p>
+        </div>
+    </div>
+    <!-- Sección de Cards -->
+    <div class="col-12">
+        <div class="row">
+            <app-item-cards [areaSelected]="areaSelected" [categorySelected]="categorySelected" [items]="items"
+                (itemSelectedEvent)="setItemSelected($event)" />
+        </div>
+    </div>
+</main>
+
+<app-item-add [areaSelected]="areaSelected" [categorySelected]="categorySelected" *ngIf="isAdmin()" />
+<app-item-edit [areaSelected]="areaSelected" [categorySelected]="categorySelected" [itemSelected]="itemSelected"
+    *ngIf="isAdmin()" />
+<app-item-information [itemSelected]="itemSelected" />
+<app-item-purchase [areaSelected]="areaSelected" [categorySelected]="categorySelected" [itemSelected]="itemSelected"
+    *ngIf="!isAdmin()" />

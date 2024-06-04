@@ -1,0 +1,40 @@
+<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title fs-5 h1 ms-2" id="modalAddLabel">Agregar Área</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formAreaAdd" (ngSubmit)="areaAdd()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title">Nombre del Área</label>
+                        <input formControlName="title" type="text" class="form-control" id="title"
+                            placeholder="Nombre del Área" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="information" class="form-label">Información sobre el Área</label>
+                        <textarea formControlName="information" class="form-control" id="information"
+                            placeholder="Área encargada de..." rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Imagen de Perfil del Área</label>
+                            <div class="d-flex flex-wrap justify-content-around">
+                                <img class="img img-thumbnail p-2 m-2" *ngFor="let icon of iconsAreas"
+                                    [src]="icon.src" alt="" (click)="selectIcon(icon)"
+                                    [ngClass]="iconSelected==icon?'selected':''">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-bs-dismiss="modal" type="submit" class="btn"
+                    title="Agregar">
+                        <img class="icon" src="assets/icons/ok.svg" alt="">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

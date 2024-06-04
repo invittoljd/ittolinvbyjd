@@ -1,0 +1,116 @@
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title fs-5 h1 ms-2" id="modalEditLabel">Editar Item</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formItemEdit" (ngSubmit)="itemEdit()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title">Nombre del Item</label>
+                        <input formControlName="title" type="text" class="form-control" id="title"
+                            placeholder="Nombre del Item" [value]="itemSelected?.title" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="information" class="form-label">Información sobre el Item</label>
+                        <textarea formControlName="information" class="form-control" id="information"
+                            placeholder="Su proposito principal es ..." rows="5"
+                            [value]="itemSelected?.information"></textarea>
+                    </div>
+                    <div class="mb-3 col-12 col-md-6 col-lg-3">
+                        <label for="stock" class="form-label">Stock del Item</label>
+                        <input formControlName="stock" class="form-control" id="stock" type="number"
+                            [value]="itemSelected?.stock" />
+                    </div>
+                    <div class="mb-3" *ngIf="!itemSelected?.loan">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="editDate"
+                                (click)="changeEditDate()" [value]="itemSelected?.batch">
+                            <label class="form-check-label" for="editDate">¿Modificar fecha de caducidad?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="editDate">
+                        <label for="date" class="form-label">Fecha de caducidad del Item</label>
+                        <input formControlName="date" class="form-control" id="date" type="date" />
+                    </div>
+                    <div class="mb-3" *ngIf="!itemSelected?.loan">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="editBatch"
+                                (click)="changeEditBatch()">
+                            <label class="form-check-label" for="editBatch">¿Modificar lote?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="editBatch">
+                        <label for="batch" class="form-label">Lote del Item</label>
+                        <input formControlName="batch" class="form-control" id="batch" type="text" />
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="editInventory"
+                                (click)="changeEditInventory()">
+                            <label class="form-check-label" for="editInventory">¿Modificar número de inventario?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="editInventory">
+                        <label for="inventory" class="form-label"># Inventario del Item</label>
+                        <input formControlName="inventory" class="form-control" id="inventory" type="text" />
+                    </div>
+                    <div class="mb-3" *ngIf="itemSelected?.loan">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="editNIU"
+                                (click)="changeEditNIU()">
+                            <label class="form-check-label" for="editNIU">¿Modificar NIU de item?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="editNIU">
+                        <label for="niu" class="form-label"># NIU del Item</label>
+                        <input formControlName="niu" class="form-control" id="niu" type="text" />
+                    </div>
+                    <div class="mb-3" *ngIf="itemSelected?.loan">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="editSerial"
+                                (click)="changeEditSerial()">
+                            <label class="form-check-label" for="editSerial">¿Modificar número de serie?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="editSerial">
+                        <label for="serial" class="form-label"># Serie del Item</label>
+                        <input formControlName="serial" class="form-control" id="serial" type="text" />
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="editManager"
+                                (click)="changeEditManager()">
+                            <label class="form-check-label" for="editManager">¿Modificar encargado(a) del item?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="editManager">
+                        <label for="manager" class="form-label">Encargado(a) del Item</label>
+                        <input formControlName="manager" class="form-control" id="manager" type="text" />
+                    </div>
+                    <!-- Agregar icono al item -->
+                    <!-- <div class="mb-3">
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Imagen de Perfil del  Item</label>
+                            <div class="d-flex flex-wrap justify-content-around">
+                                <img class="img img-thumbnail p-2 m-2" *ngFor="let icon of iconsItems"
+                                    [src]="icon.src" alt="" (click)="selectIcon(icon)"
+                                    [ngClass]="iconSelected==icon?'selected':''">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button data-bs-dismiss="modal" type="button" class="btn danger" title="Eliminar"
+                        (click)="deleteItem()">
+                        <img class="icon" src="assets/icons/danger.svg" alt="Eliminar">
+                    </button>
+                    <button data-bs-dismiss="modal" type="submit" class="btn" title="Editar">
+                        <img class="icon" src="assets/icons/ok.svg" alt="Aceptar">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

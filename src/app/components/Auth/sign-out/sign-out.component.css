@@ -1,0 +1,11 @@
+a{
+    text-decoration: none;
+}
+
+.icon{
+    width: 2rem;
+}
+
+.btn:hover{
+    background-color: var(--background-color-3);
+}

@@ -1,0 +1,118 @@
+<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalAddLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title fs-5 h1 ms-2" id="modalAddLabel">Agregar Item</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formItemAdd" (ngSubmit)="itemAdd()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title">Nombre del Item</label>
+                        <input formControlName="title" type="text" class="form-control" id="title"
+                            placeholder="Nombre del Item" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="information" class="form-label">Información sobre el Item</label>
+                        <textarea formControlName="information" class="form-control" id="information"
+                            placeholder="Su proposito principal es ..." rows="5"></textarea>
+                    </div>
+                    <div class="mb-3 col-12 col-md-6 col-lg-3">
+                        <label for="stock" class="form-label">Stock del Item</label>
+                        <input formControlName="stock" class="form-control" id="stock" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="isLoan"
+                                (click)="changeIsLoan()">
+                            <label class="form-check-label" for="isLoan">¿Es un Equipo / Maquinaría?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch" *ngIf="!isLoan">
+                            <input class="form-check-input" type="checkbox" role="switch" id="addDate"
+                                (click)="changeAddDate()">
+                            <label class="form-check-label" for="addDate">¿Agregar fecha de caducidad?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="addDate">
+                        <label for="date" class="form-label">Fecha de caducidad del Item</label>
+                        <input formControlName="date" class="form-control" id="date" type="date"/>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch" *ngIf="!isLoan">
+                            <input class="form-check-input" type="checkbox" role="switch" id="addBatch"
+                                (click)="changeAddBatch()">
+                            <label class="form-check-label" for="addBatch">¿Agregar lote ?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="addBatch">
+                        <label for="batch" class="form-label">Lote del Item</label>
+                        <input formControlName="batch" class="form-control" id="batch" type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="addInventory"
+                                (click)="changeAddInventory()">
+                            <label class="form-check-label" for="addInventory">¿Agregar número de inventario?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="addInventory">
+                        <label for="inventory" class="form-label"># Inventario del Item</label>
+                        <input formControlName="inventory" class="form-control" id="inventory" type="text"/>
+                    </div>
+                    <div class="mb-3" *ngIf="isLoan">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="addNIU"
+                                (click)="changeAddNIU()">
+                            <label class="form-check-label" for="addNIU">¿Agregar NIU de item?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="addNIU">
+                        <label for="niu" class="form-label"># NIU del Item</label>
+                        <input formControlName="niu" class="form-control" id="niu" type="text"/>
+                    </div>
+                    <div class="mb-3" *ngIf="isLoan">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="addSerial"
+                                (click)="changeAddSerial()">
+                            <label class="form-check-label" for="addSerial">¿Agregar número de serie?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="addSerial">
+                        <label for="serial" class="form-label"># Serie del Item</label>
+                        <input formControlName="serial" class="form-control" id="serial" type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="addManager"
+                                (click)="changeAddManager()">
+                            <label class="form-check-label" for="addManager">¿Agregar encargado(a) del item?</label>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="addManager">
+                        <label for="manager" class="form-label">Encargado(a) del Item</label>
+                        <input formControlName="manager" class="form-control" id="manager" type="text"/>
+                    </div>
+                    <!-- Agregar icono al item -->
+                    <!-- <div class="mb-3">
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Imagen de Perfil del  Item</label>
+                            <div class="d-flex flex-wrap justify-content-around">
+                                <img class="img img-thumbnail p-2 m-2" *ngFor="let icon of iconsItems"
+                                    [src]="icon.src" alt="" (click)="selectIcon(icon)"
+                                    [ngClass]="iconSelected==icon?'selected':''">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                    <button data-bs-dismiss="modal" type="submit" class="btn"
+                    title="Agregar">
+                        <img class="icon" src="assets/icons/ok.svg" alt="">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

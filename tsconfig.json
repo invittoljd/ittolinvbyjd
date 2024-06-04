@@ -1,0 +1,73 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "@environment/*": [
+        "./src/environments/*"
+      ],
+      "@interceptors/*": [
+        "./src/app/interceptors/*"
+      ],
+      "@guards/*": [
+        "./src/app/guards/*"
+      ],
+      "@core/*": [
+        "./src/app/core/*"
+      ],
+      "@components/*": [
+        "./src/app/components/*"
+      ],
+      "@auth/*": [
+        "./src/app/components/Auth/*"
+      ],
+      "@area/*": [
+        "./src/app/components/Inventory/Area/*"
+      ],
+      "@category/*": [
+        "./src/app/components/Inventory/Category/*"
+      ],
+      "@item/*": [
+        "./src/app/components/Inventory/Item/*"
+      ],
+      "@home/*": [
+        "./src/app/components/Home/*"
+      ],
+      "@requests/*": [
+        "./src/app/components/Requests/*"
+      ],
+      "@messages/*": [
+        "./src/app/components/Messages/*"
+      ],
+      "@services/*": [
+        "./src/app/services/*"
+      ],
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
