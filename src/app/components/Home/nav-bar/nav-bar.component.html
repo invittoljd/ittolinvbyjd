@@ -16,11 +16,17 @@
         <li class="nav-item ms-2 rounded text-center p-1">
           <a [routerLink]="['/','home','requests']" class="nav-link">Solicitudes</a>
         </li>
-        <li class="nav-item ms-2 rounded text-center p-1" *ngIf="isAdmin()">
-          <a [routerLink]="['/','home','analytics']" class="nav-link">Análisis</a>
+        <li class="nav-item ms-2 rounded text-center p-1">
+          <a [routerLink]="['/','home','itineraries']" class="nav-link">Itinerarios</a>
         </li>
         <li class="nav-item ms-2 rounded text-center p-1" *ngIf="isAdmin()">
           <a [routerLink]="['/','auth','sign-in',]" class="nav-link">Usuarios</a>
+        </li>
+        <li class="nav-item ms-2 rounded text-center p-1" *ngIf="isAdmin()">
+          <a [routerLink]="['/','home','import',]" class="nav-link">Importar</a>
+        </li>
+        <li class="nav-item ms-2 rounded text-center p-1" *ngIf="isAdmin()">
+          <a [routerLink]="['/','home','export',]" class="nav-link">Export</a>
         </li>
       </ul>
     </div>

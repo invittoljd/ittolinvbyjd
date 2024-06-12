@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('@home/home.routes').then((r) => r.routes),
-    canActivate: [sessionGuard]
+    // canActivate: [sessionGuard]
   },
   {
     path: 'auth',

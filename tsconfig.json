@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -56,8 +55,11 @@
       "@requests/*": [
         "./src/app/components/Requests/*"
       ],
-      "@messages/*": [
-        "./src/app/components/Messages/*"
+      "@itinerary/*": [
+        "./src/app/components/Itineraries/*"
+      ],
+      "@dataimport/*": [
+        "./src/app/components/Imports/*"
       ],
       "@services/*": [
         "./src/app/services/*"

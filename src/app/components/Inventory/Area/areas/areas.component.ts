@@ -13,6 +13,7 @@ import { AreaItemModel } from '@core/models/AreaItem.model';
 /**Services */
 import { AreaService } from '@services/Area/area.service';
 import { SessionService } from '@services/Session/session.service';
+import { WaitingModalService } from '@services/WaitingModal/waiting-modal.service';
 
 @Component({
   selector: 'app-areas',
@@ -29,6 +30,7 @@ export class AreasComponent {
   /**Injects */
   private _sessionService = inject(SessionService);
   private _areasService = inject(AreaService);
+  private _waitingModalService = inject(WaitingModalService);
 
   /**
    * The isAdmin function checks if the current session is for an admin user.
@@ -44,7 +46,9 @@ export class AreasComponent {
    * areas from a service.
    */
   async ngOnInit() {
+    this._waitingModalService.setIsWaiting(true);
     this.areas = await this._areasService.getAreas();
+    this._waitingModalService.setIsWaiting(false);
   }
 
   /**

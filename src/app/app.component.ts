@@ -1,6 +1,8 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+/**Components */
+import { WaitingModalComponent } from '@components/Home/utilities/waiting-modal/waiting-modal.component';
 
 /**Services */
 import { CookieService } from 'ngx-cookie-service';
@@ -10,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, WaitingModalComponent],
   providers: [
     CookieService
   ],

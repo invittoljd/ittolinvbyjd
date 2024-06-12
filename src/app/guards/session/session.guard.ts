@@ -3,11 +3,12 @@ import { CanActivateFn, Router } from '@angular/router';
 
 /**Environment */
 import { environment } from '@environment/environment';
+import { AuthService } from '@services/Auth/auth.service';
 
 /**Services */
 import { CookieService } from 'ngx-cookie-service';
 
-export const sessionGuard: CanActivateFn = (route, state) => {
+export const sessionGuard: CanActivateFn = async (route, state) => {
   /**Injects */
   const cookieService = inject(CookieService);
   const router = inject(Router);
@@ -15,10 +16,17 @@ export const sessionGuard: CanActivateFn = (route, state) => {
   /**Variables */
   const token = cookieService.get(environment.tokenName);
 
-  if (!token) {
-    cookieService.deleteAll();
-    router.navigate(['']);
-    return false;
+  if (token) {
+    const _authService = inject(AuthService);
+    const response = await _authService.getUserInfo();
+    const { type } = response;
+    if (type) {
+      if (type == 1) {
+        return true;
+      }
+    }
   }
-  return true;
+  cookieService.deleteAll();
+  router.navigate(['/', 'auth']);
+  return false;
 };

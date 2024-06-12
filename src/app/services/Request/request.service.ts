@@ -15,11 +15,27 @@ export class RequestService {
   private apiUrl = `${environment.url}/api/requests`;
 
   /**Injects */
-  private http=inject(HttpClient);
+  private http = inject(HttpClient);
 
-  async getRequests(): Promise<Array<RequestModel>> {
+  async getRequests(type: String): Promise<Array<RequestModel>> {
     try {
-      const response: any = await this.http.get(this.apiUrl).toPromise();
+      const response: any = await this.http.get(this.apiUrl + "/" + type).toPromise();
+      if (response) {
+        const { message, requests } = response;
+        if (requests) {
+          return requests;
+        }
+        console.log('Error al obtener solicitudes:', message);
+      }
+    } catch (error) {
+      console.log('Error al realizar la solicitud:', error);
+    }
+    return [];
+  }
+
+  async getRequestsToday(date:String): Promise<Array<RequestModel>> {
+    try {
+      const response: any = await this.http.get(this.apiUrl + "/toDate/"+date).toPromise();
       if (response) {
         const { message, requests } = response;
         if (requests) {
@@ -98,5 +114,27 @@ export class RequestService {
       console.log('Error al realizar la solicitud:', error);
     }
     return undefined;
+  }
+
+  async checkAvailability(request: RequestModel) {
+    try {
+      const response: any = await this.http.get(this.apiUrl + "/checkAvailability" + "/" + request._id).toPromise();
+      if (response) {
+        const { message, requests, ok } = response;
+        if (ok) {
+          console.log("Disponible")
+          return { ok };
+        }
+        if (requests) {
+          console.log("Sobrepuestas")
+          return { requests };
+        }
+        console.log('Error al revisar la disponibilidad:', message);
+      }
+    } catch (error) {
+      console.log('Error al realizar la solicitud:', error);
+    }
+    console.log("Sin información")
+    return {};
   }
 }

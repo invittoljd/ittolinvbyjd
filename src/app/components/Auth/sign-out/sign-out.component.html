@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="col-12 col-sm-6 col-md-4 mt-4" *ngFor="let user of users">
-            <app-sign-out-card [user]="user" />
+            <app-sign-out-card [user]="user" [users]="users"/>
         </div>
     </div>
 </div>

@@ -11,6 +11,7 @@ import { CardItemModel } from '@core/models/CardItem.model';
 import { AreaService } from '@services/Area/area.service';
 import { CategoryService } from '@services/Category/category.service';
 import { SessionService } from '@services/Session/session.service';
+import { WaitingModalService } from '@services/WaitingModal/waiting-modal.service';
 
 /**Components */
 import { ItemCardsComponent } from '@item/item-cards/item-cards.component';
@@ -39,6 +40,7 @@ export class ItemsComponent {
   private _activatedRoute = inject(ActivatedRoute);
   private _areasService = inject(AreaService);
   private _categoriesService = inject(CategoryService);
+  private _waitingModalService = inject(WaitingModalService);
 
   isAdmin() {
     return this._sessionService.isAdmin();
@@ -46,6 +48,7 @@ export class ItemsComponent {
 
   async ngOnInit() {
     this._activatedRoute.paramMap.subscribe(async (params) => {
+      this._waitingModalService.setIsWaiting(true);
       const area_id: String = '' + params.get('area_id');
       const category_id: String = '' + params.get('category_id');
       this.areaSelected = await this._areasService.getArea(area_id);
@@ -55,6 +58,7 @@ export class ItemsComponent {
           this.items = this.categorySelected.items;
         }
       }
+      this._waitingModalService.setIsWaiting(false);
     });
   }
 

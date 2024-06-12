@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 
 /**Models */
@@ -6,11 +6,12 @@ import { RequestModel } from '@core/models/Request.model';
 
 /**Services */
 import { RequestService } from '@services/Request/request.service';
+import { WaitingModalService } from '@services/WaitingModal/waiting-modal.service';
 
 @Component({
   selector: 'app-request-card-admin',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, NgFor],
   templateUrl: './request-card-admin.component.html',
   styleUrl: './request-card-admin.component.css'
 })
@@ -21,8 +22,13 @@ export class RequestCardAdminComponent {
   /**Inputs */
   @Input() request?: RequestModel;
 
+  /**Variables */
+  overlappingRequests?: Array<RequestModel>;
+  status?: String;
+
   /**Injects */
   private _requestService = inject(RequestService);
+  private _waitingModalService = inject(WaitingModalService);
 
   setRequestSelected(request: RequestModel | undefined) {
     if (request) {
@@ -32,7 +38,6 @@ export class RequestCardAdminComponent {
 
   async setStatus(status: boolean, request: RequestModel | undefined) {
     if (request) {
-
       const updated: boolean = await this._requestService.updateRequest({ ...request, status });
       if (updated) {
         request.status = status;
@@ -54,7 +59,6 @@ export class RequestCardAdminComponent {
       const { datetimeStart } = this.request;
       if (datetimeStart) {
         const date = new Date(datetimeStart);
-        // Puedes ajustar las opciones de formato según tus necesidades
         return date.toLocaleDateString('es-ES', {
           year: 'numeric',
           month: 'long',
@@ -72,7 +76,6 @@ export class RequestCardAdminComponent {
       const { datetimeEnd } = this.request;
       if (datetimeEnd) {
         const date = new Date(datetimeEnd);
-        // Puedes ajustar las opciones de formato según tus necesidades
         return date.toLocaleDateString('es-ES', {
           year: 'numeric',
           month: 'long',
@@ -83,5 +86,21 @@ export class RequestCardAdminComponent {
       }
     }
     return 'Sin información';
+  }
+
+  async checkAvailability() {
+    this._waitingModalService.setIsWaiting(true);
+    if (this.request) {
+      const { ok, requests } = await this._requestService.checkAvailability(this.request);
+      if (ok) {
+        this.status = "Equipo Disponible";
+      } else if (requests) {
+        this.status = "Equipo Ocupado";
+        this.overlappingRequests = requests;
+      }else{
+        this.status = "Error al revisar, favor de verificar";
+      }
+    }
+    this._waitingModalService.setIsWaiting(false);
   }
 }

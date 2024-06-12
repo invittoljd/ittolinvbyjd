@@ -5,6 +5,7 @@ import { UserModel } from '@core/models/User.model';
 
 /**Services */
 import { AuthService } from '@services/Auth/auth.service';
+import { WaitingModalService } from '@services/WaitingModal/waiting-modal.service';
 
 @Component({
   selector: 'app-sign-out-card',
@@ -23,6 +24,7 @@ export class SignOutCardComponent {
 
   /**Injects */
   private _authService = inject(AuthService);
+  private _waitingModalService = inject(WaitingModalService);
 
   /**
    * The `changeDeleteAll` function toggles the value of the `deleteAll` property.
@@ -39,8 +41,10 @@ export class SignOutCardComponent {
    * parameter represents the user that has been selected for deletion.
    */
   async deleteUser(userSelected: UserModel | undefined) {
+    this._waitingModalService.setIsWaiting(true);
     if (this.users && userSelected) {
       const deleted: boolean = await this._authService.deleteUser(this.users, userSelected, this.deleteAll);
     }
+    this._waitingModalService.setIsWaiting(false);
   }
 }

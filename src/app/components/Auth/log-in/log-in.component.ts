@@ -10,6 +10,7 @@ import { AlertComponent } from '@components/Home/alerts/alert/alert.component';
 
 /**Services */
 import { AuthService } from '@services/Auth/auth.service';
+import { WaitingModalService } from '@services/WaitingModal/waiting-modal.service';
 
 @Component({
   selector: 'app-log-in',
@@ -28,12 +29,14 @@ export class LogInComponent {
   /**Injects */
   private _router = inject(Router);
   private _authService = inject(AuthService);
+  private _waitingModalService = inject(WaitingModalService);
 
   /**
    * The `ngOnInit` function initializes a form for user login with validation rules for username and
    * password length.
    */
   ngOnInit(): void {
+
     this.formLogIn = new FormGroup({
       user: new FormControl('', [
         Validators.required,
@@ -53,6 +56,7 @@ export class LogInComponent {
    * credentials, and navigates to the home page if successful.
    */
   async login() {
+    this._waitingModalService.setIsWaiting(true);
     if (this.formLogIn.valid) {
       const { user, password } = this.formLogIn.value;
       if (await this._authService.logIn(user, password)) {
@@ -65,5 +69,6 @@ export class LogInComponent {
         }
       }
     }
+    this._waitingModalService.setIsWaiting(false);
   }
 }

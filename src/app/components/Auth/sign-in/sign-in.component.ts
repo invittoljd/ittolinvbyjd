@@ -8,6 +8,7 @@ import { AlertModel, AlertType } from '@core/models/Alert.model';
 /**Services */
 import { AuthService } from '@services/Auth/auth.service';
 import { AlertService } from '@services/Alert/alert.service';
+import { WaitingModalService } from '@services/WaitingModal/waiting-modal.service';
 
 /**Components */
 import { AlertComponent } from '@components/Home/alerts/alert/alert.component';
@@ -30,6 +31,7 @@ export class SignInComponent {
   private _router = inject(Router);
   private _authService = inject(AuthService);
   private _alertService = inject(AlertService);
+  private _waitingModalService = inject(WaitingModalService);
 
   /**
    * The function `ngOnInit` initializes a form with validation rules for user, password, and type
@@ -60,6 +62,7 @@ export class SignInComponent {
    * authentication service, and displays success or error alerts accordingly.
    */
   async signIn() {
+    this._waitingModalService.setIsWaiting(true);
     if (this.formSignIn.valid) {
       const { user, password, type } = this.formSignIn.value;
       if (await this._authService.signIn(user, password, type)) {
@@ -78,6 +81,7 @@ export class SignInComponent {
         }
       }
     }
+    this._waitingModalService.setIsWaiting(false);
   }
 
   /**
