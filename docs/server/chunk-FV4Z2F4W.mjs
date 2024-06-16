@@ -1,2 +1,0 @@
-import './polyfills.server.mjs';
-import{L as n}from"./chunk-OEQEIWQ2.mjs";var r=(()=>{let t=class t{constructor(){this.isWaiting=!1}setIsWaiting(e){this.isWaiting=e}getIsWaiting(){return this.isWaiting}};t.\u0275fac=function(s){return new(s||t)},t.\u0275prov=n({token:t,factory:t.\u0275fac,providedIn:"root"});let i=t;return i})();var c={url:"https://ittolinvbyjdbackend.vercel.app",tokenName:"token_session",typeAdmin:1};export{r as a,c as b};

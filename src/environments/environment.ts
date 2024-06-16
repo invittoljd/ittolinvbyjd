@@ -4,8 +4,8 @@
 
 export const environment = {
   // url: 'https://cvd-back-end.vercel.app',
-  // url: 'http://localhost:3000',
-  url: 'https://ittolinvbyjdbackend.vercel.app',
+  url: 'http://localhost:3000',
+  // url: 'https://ittolinvbyjdbackend.vercel.app',
   tokenName: 'token_session',
   typeAdmin: 1,
 };
