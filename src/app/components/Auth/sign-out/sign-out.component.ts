@@ -9,11 +9,12 @@ import { AuthService } from '@services/Auth/auth.service';
 
 /**Cards */
 import { SignOutCardComponent } from '../sign-out-card/sign-out-card.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-out',
   standalone: true,
-  imports: [SignOutCardComponent, NgFor],
+  imports: [SignOutCardComponent, NgFor, RouterLink],
   templateUrl: './sign-out.component.html',
   styleUrl: './sign-out.component.css'
 })
