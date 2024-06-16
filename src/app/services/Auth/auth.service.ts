@@ -39,6 +39,8 @@ export class AuthService {
 
   async logIn(username: String, password: String) {
     try {
+      console.log(this.apiUrl + "/login")
+      console.log({ username, password, keep: false })
       const response: any = await this.http.post(this.apiUrl + "/login", { username, password, keep: false }).toPromise();
       if (response) {
         const { message, token } = response;
