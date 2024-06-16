@@ -1,0 +1,13 @@
+{
+  "routes": [
+    "/auth",
+    "/auth/log-in",
+    "/auth/sign-in",
+    "/auth/sign-out",
+    "/home",
+    "/home/areas",
+    "/home/import",
+    "/home/itineraries",
+    "/home/requests"
+  ]
+}
