@@ -12,6 +12,7 @@ import { CategoryItemModel } from '@core/models/CategoryItem.model';
 import { AlertService } from '@services/Alert/alert.service';
 import { ItemService } from '@services/Item/item.service';
 import { RequestService } from '@services/Request/request.service';
+import { SessionService } from '@services/Session/session.service';
 
 @Component({
   selector: 'app-item-purchase',
@@ -33,6 +34,7 @@ export class ItemPurchaseComponent {
   private _itemService = inject(ItemService);
   private _requestService = inject(RequestService);
   private _alertService = inject(AlertService);
+  private _sessionService = inject(SessionService);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['itemSelected'] && this.itemSelected) {
@@ -44,11 +46,16 @@ export class ItemPurchaseComponent {
   ngOnInit(): void {
     this.initializeForm();
   }
-  initializeForm(): void {
+
+  async initializeForm() {
     let stock = this.itemSelected?.stock ? this.itemSelected.stock : 0;
     let isLoan: boolean = this.itemSelected?.loan ? this.itemSelected.loan : false;
 
     this.formItemPurchase = new FormGroup({
+      username: new FormControl('' , [
+        Validators.minLength(1),
+        Validators.maxLength(255)
+      ]),
       quantity: new FormControl(0, [
         Validators.required,
         Validators.min(0),
@@ -103,10 +110,14 @@ export class ItemPurchaseComponent {
       type: AlertType.Danger
     };
     if (this.itemSelected && this.formItemPurchase.valid) {
-      const { quantity, description, datetimeStart, datetimeEnd } = this.formItemPurchase.value;
+      const { quantity, description, datetimeStart, datetimeEnd, username } = this.formItemPurchase.value;
       const request = await this._itemService.requestItem(this.itemSelected, quantity, description, datetimeStart, datetimeEnd);
       if (request) {
-        await this._requestService.addRequest(request);
+        if(this.isAdmin()){
+          await this._requestService.addRequestAdmin(request, username);
+        }else{
+          await this._requestService.addRequest(request);
+        }
         if (this.itemSelected.stock && !this.itemSelected.loan) {
           this.itemSelected.stock -= quantity;
         }
@@ -130,5 +141,12 @@ export class ItemPurchaseComponent {
     ]);
     this.formItemPurchase.get('quantity')?.updateValueAndValidity();
   }
-
+  /**
+   * The function `isAdmin` checks if the current session is for an admin user.
+   * @returns The `isAdmin()` function is returning the result of calling the `isAdmin()` method of the
+   * `_sessionService` object.
+   */
+  isAdmin() {
+    return this._sessionService.isAdmin();
+  }
 }

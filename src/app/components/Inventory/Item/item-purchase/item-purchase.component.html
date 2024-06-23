@@ -7,6 +7,11 @@
             </div>
             <form [formGroup]="formItemPurchase" (ngSubmit)="itemPurchase()">
                 <div class="modal-body">
+                    <div class="mb-3" *ngIf="isAdmin()">
+                        <label for="username">Nombre del usuario a asignar</label>
+                        <input formControlName="username" type="text" class="form-control" id="username"
+                            placeholder="Nombre del Usuario" />
+                    </div>
                     <div class="mb-3">
                         <label class="fw-bold" for="title">Nombre del Item:</label>
                         <p id="title">

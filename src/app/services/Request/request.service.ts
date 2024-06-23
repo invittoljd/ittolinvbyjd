@@ -33,9 +33,9 @@ export class RequestService {
     return [];
   }
 
-  async getRequestsToday(date:String): Promise<Array<RequestModel>> {
+  async getRequestsToday(date: String): Promise<Array<RequestModel>> {
     try {
-      const response: any = await this.http.get(this.apiUrl + "/toDate/"+date).toPromise();
+      const response: any = await this.http.get(this.apiUrl + "/toDate/" + date).toPromise();
       if (response) {
         const { message, requests } = response;
         if (requests) {
@@ -52,6 +52,22 @@ export class RequestService {
   async addRequest(request: RequestModel): Promise<String | undefined> {
     try {
       const response: any = await this.http.post(this.apiUrl, { request }).toPromise();
+      if (response) {
+        const { request: newRequest } = response;
+        if (newRequest) {
+          return newRequest._id;
+        }
+        console.log('Error al crear solicitud:', response.message);
+      }
+    } catch (error) {
+      console.log('Error al realizar la solicitud:', error);
+    }
+    return undefined;
+  }
+
+  async addRequestAdmin(request: RequestModel, username2: string): Promise<String | undefined> {
+    try {
+      const response: any = await this.http.post(this.apiUrl + "/admin", { request, username2 }).toPromise();
       if (response) {
         const { request: newRequest } = response;
         if (newRequest) {

@@ -5,7 +5,7 @@ export interface CardItemModel {
   date?: number,
   batch?: number,
   inventory?: number,
-  niu?: number,
+  niu?: string,
   serial?: number,
   manager?: number,
   src?: String
