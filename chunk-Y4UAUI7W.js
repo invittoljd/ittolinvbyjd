@@ -1,0 +1,1 @@
+import{M as r}from"./chunk-EGZLEYQ3.js";var a=(()=>{let t=class t{constructor(){this.isWaiting=!1}setIsWaiting(s){this.isWaiting=s}getIsWaiting(){return this.isWaiting}};t.\u0275fac=function(n){return new(n||t)},t.\u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"});let i=t;return i})();export{a};
