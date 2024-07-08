@@ -29,10 +29,10 @@ export class AuthService {
         if (ok) {
           return true;
         }
-        console.log('Error al hacer el login:', message);
+        this.showError('Error al hacer el login:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
@@ -46,10 +46,10 @@ export class AuthService {
           this._cookieService.set(environment.tokenName, token, undefined, '/')
           return true;
         }
-        console.log('Error al hacer el login:', message);
+        this.showError('Error al hacer el login:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
@@ -99,5 +99,10 @@ export class AuthService {
       }
     } catch (error) { }
     return false;
+  }
+
+  private showError(title: string, error: any) {
+    console.log('Error en el archivo: auth.service.ts');
+    console.log(title, '\n\t', environment.showErrors ? error : '');
   }
 }

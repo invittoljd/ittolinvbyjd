@@ -33,15 +33,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label fw-bold">Descripción de la solicitud</label>
-                        <input placeholder="La solicitud es para..." formControlName="description" class="form-control" id="description" type="text" />
+                        <input placeholder="La solicitud es para..." formControlName="description" class="form-control"
+                            id="description" type="text" />
                     </div>
                     <div class="mb-3" *ngIf="itemSelected?.loan">
                         <label for="datetimeStart" class="form-label fw-bold">Fecha de inicio de uso del equipo</label>
-                        <input formControlName="datetimeStart" class="form-control" id="datetimeStart" type="datetime-local" />
+                        <input formControlName="datetimeStart" class="form-control" id="datetimeStart"
+                            type="datetime-local" />
                     </div>
                     <div class="mb-3" *ngIf="itemSelected?.loan">
-                        <label for="datetimeEnd" class="form-label fw-bold">Fecha de finalización de uso del equipo</label>
-                        <input formControlName="datetimeEnd" class="form-control" id="datetimeEnd" type="datetime-local" />
+                        <label for="datetimeEnd" class="form-label fw-bold">Fecha de finalización de uso del
+                            equipo</label>
+                        <input formControlName="datetimeEnd" class="form-control" id="datetimeEnd"
+                            type="datetime-local" />
                     </div>
                 </div>
                 <div class="modal-footer justify-content-end">

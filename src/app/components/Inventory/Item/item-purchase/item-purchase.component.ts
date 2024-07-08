@@ -52,7 +52,7 @@ export class ItemPurchaseComponent {
     let isLoan: boolean = this.itemSelected?.loan ? this.itemSelected.loan : false;
 
     this.formItemPurchase = new FormGroup({
-      username: new FormControl('' , [
+      username: new FormControl('', [
         Validators.minLength(1),
         Validators.maxLength(255)
       ]),
@@ -103,7 +103,6 @@ export class ItemPurchaseComponent {
   }
 
   async itemPurchase() {
-    console.log(this.formItemPurchase)
     let alert: AlertModel = {
       keep: false,
       text: "Error al solicitar el Item, favor de revisar",
@@ -113,9 +112,9 @@ export class ItemPurchaseComponent {
       const { quantity, description, datetimeStart, datetimeEnd, username } = this.formItemPurchase.value;
       const request = await this._itemService.requestItem(this.itemSelected, quantity, description, datetimeStart, datetimeEnd);
       if (request) {
-        if(this.isAdmin()){
+        if (this.isAdmin()) {
           await this._requestService.addRequestAdmin(request, username);
-        }else{
+        } else {
           await this._requestService.addRequest(request);
         }
         if (this.itemSelected.stock && !this.itemSelected.loan) {
@@ -127,9 +126,11 @@ export class ItemPurchaseComponent {
           type: AlertType.Success
         }
         this.updateMaxQuantityValidation();
+        return request;
       }
     }
     this._alertService.addAlert(alert);
+    return undefined;
   }
   updateMaxQuantityValidation() {
     const stock = this.itemSelected?.stock || 0;

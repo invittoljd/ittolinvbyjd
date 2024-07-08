@@ -1,10 +1,124 @@
-<main class="container">
-    <div class="row custom-background rounded my-4 p-4">
-        <p class="h2 text-center">Importar datos de un excel</p>
+<form [formGroup]="formFile" (change)="fileChanged($event)" class="row justify-content-center" (ngSubmit)="submit()">
+  <div class="col-12 p-0 pe-5 my-2">
+    <h2>Area</h2>
+    <select class="form-select" aria-label="Select Area">
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <div class="col-12 p-0 pe-5 my-2">
+    <h2>Categoria</h2>
+    <select class="form-select" aria-label="Select Category">
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <div class="row justify-content-around mt-5">
+    <div class="col-10 p-0 pe-5">
+      <input class="form-control" type="file" accept=".csv">
     </div>
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-9 col-lg-6 text-center">
-            <input class="form-control form-control-lg" id="formFileLg" type="file" accept=".csv, .xlsx, .xls, .txt">
-        </div>
-    </div>
-</main>
+    <input class="btn btn-outline-dark col-2" type="submit" value="ANALIZAR">
+  </div>
+</form>
+<div class="row mt-5" *ngIf="!showDataFiltered">
+  <table class="col-12 table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let item of getHeaders()">{{item}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getData()">
+        <td *ngFor="let data of item">{{data}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row my-5" *ngIf="showDataFiltered">
+  <div class="col-12 mb-2 d-flex justify-content-between">
+    <h2>Nuevos Registros</h2>
+    <button class="btn btn-outline-dark" (click)="sendCreateData()">Aplicar</button>
+  </div>
+  <hr>
+  <table class="col-12 table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let item of getHeaders()">{{item}}</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataCreate">
+        <td>{{item.title}}</td>
+        <td>{{item.serial}}</td>
+        <td>{{item.information}}</td>
+        <td>{{item.inventory}}</td>
+        <td>{{item.niu}}</td>
+        <td>{{item.manager}}</td>
+        <td>AREA</td>
+        <td>FACTURA</td>
+        <td>
+          <img class="" src="https://cdn-icons-png.flaticon.com/512/5978/5978235.png" alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="col-12 mb-2 d-flex justify-content-between">
+    <h2>Actualizar Registros</h2>
+    <button class="btn btn-outline-dark">Aplicar</button>
+  </div>
+  <hr>
+  <table class="col-12 table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let item of getHeaders()">{{item}}</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataUpload">
+        <td>{{item.title}}</td>
+        <td>{{item.serial}}</td>
+        <td>{{item.information}}</td>
+        <td>{{item.inventory}}</td>
+        <td>{{item.niu}}</td>
+        <td>{{item.manager}}</td>
+        <td>AREA</td>
+        <td>FACTURA</td>
+        <td>
+          <img class="" src="https://cdn-icons-png.flaticon.com/512/5978/5978235.png" alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="col-12 mb-2 d-flex justify-content-between">
+    <h2>Eliminar Registros</h2>
+    <button class="btn btn-outline-dark">Aplicar</button>
+  </div>
+  <hr>
+  <table class="col-12 table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let item of getHeaders()">{{item}}</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataUpload">
+        <td>{{item.title}}</td>
+        <td>{{item.serial}}</td>
+        <td>{{item.information}}</td>
+        <td>{{item.inventory}}</td>
+        <td>{{item.niu}}</td>
+        <td>{{item.manager}}</td>
+        <td>AREA</td>
+        <td>FACTURA</td>
+        <td>
+          <img class="" src="https://cdn-icons-png.flaticon.com/512/5978/5978235.png" alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -26,10 +26,10 @@ export class CategoryService {
         if (category) {
           return category;
         }
-        console.log('Error al obtener la categoría:', message);
+        this.showError('Error al obtener la categoría:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -51,10 +51,10 @@ export class CategoryService {
           }
           return true;
         }
-        console.log('Error al eliminar la categoría:', message);
+        this.showError('Error al eliminar la categoría:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
@@ -73,10 +73,10 @@ export class CategoryService {
           categories.push(newCategory);
           return newCategory._id;
         }
-        console.log('Error al crear categoría:', response.message);
+        this.showError('Error al crear categoría:', response.message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -116,12 +116,16 @@ export class CategoryService {
         if (category) {
           return true;
         }
-        console.log('Error al editar categoría:', message);
+        this.showError('Error al editar categoría:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
 
+  private showError(title: string, error: any) {
+    console.log('Error en el archivo: category.service.ts');
+    console.log(title, '\n\t', environment.showErrors ? error : '');
+  }
 }

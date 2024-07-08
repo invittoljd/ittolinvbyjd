@@ -37,10 +37,10 @@ export class ItemService {
           category.items.push(newItem);
           return newItem._id;
         }
-        console.log('Error al crear item:', response.message);
+        this.showError('Error al crear item:', response.message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -79,10 +79,10 @@ export class ItemService {
         if (item) {
           return true;
         }
-        console.log('Error al editar item:', message);
+        this.showError('Error al editar item:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
@@ -100,10 +100,10 @@ export class ItemService {
           }
           return true;
         }
-        console.log('Error al eliminar el item:', message);
+        this.showError('Error al eliminar el item:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
@@ -140,5 +140,9 @@ export class ItemService {
     }
     return undefined;
   }
-  
+
+  private showError(title: string, error: any) {
+    console.log('Error en el archivo: item.service.ts');
+    console.log(title, '\n\t', environment.showErrors ? error : '');
+  }
 }

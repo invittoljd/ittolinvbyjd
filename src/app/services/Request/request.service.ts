@@ -25,10 +25,10 @@ export class RequestService {
         if (requests) {
           return requests;
         }
-        console.log('Error al obtener solicitudes:', message);
+        this.showError('Error al obtener solicitudes(getRequests):', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud(getRequests):', error);
     }
     return [];
   }
@@ -41,10 +41,10 @@ export class RequestService {
         if (requests) {
           return requests;
         }
-        console.log('Error al obtener solicitudes:', message);
+        this.showError('Error al obtener solicitudes:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return [];
   }
@@ -55,12 +55,13 @@ export class RequestService {
       if (response) {
         const { request: newRequest } = response;
         if (newRequest) {
+          request._id = newRequest._id;
           return newRequest._id;
         }
-        console.log('Error al crear solicitud:', response.message);
+        this.showError('Error al crear solicitud:', response.message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -71,12 +72,13 @@ export class RequestService {
       if (response) {
         const { request: newRequest } = response;
         if (newRequest) {
+          request._id = newRequest;
           return newRequest._id;
         }
-        console.log('Error al crear solicitud:', response.message);
+        this.showError('Error al crear solicitud:', response.message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -92,10 +94,10 @@ export class RequestService {
             return requests.splice(index, 1)[0];
           }
         }
-        console.log('Error al eliminar el área:', message);
+        this.showError('Error al eliminar el área:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -108,10 +110,10 @@ export class RequestService {
         if (ok) {
           return true;
         }
-        console.log('Error al modificar solicitud:', message);
+        this.showError('Error al modificar solicitud:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return false;
   }
@@ -124,10 +126,10 @@ export class RequestService {
         if (messageSaved) {
           return messageSaved;
         }
-        console.log('Error al mandar mensaje:', message);
+        this.showError('Error al mandar mensaje:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
     return undefined;
   }
@@ -138,19 +140,21 @@ export class RequestService {
       if (response) {
         const { message, requests, ok } = response;
         if (ok) {
-          console.log("Disponible")
           return { ok };
         }
         if (requests) {
-          console.log("Sobrepuestas")
           return { requests };
         }
-        console.log('Error al revisar la disponibilidad:', message);
+        this.showError('Error al revisar la disponibilidad:', message);
       }
     } catch (error) {
-      console.log('Error al realizar la solicitud:', error);
+      this.showError('Error al realizar la solicitud:', error);
     }
-    console.log("Sin información")
     return {};
+  }
+
+  private showError(title: string, error: any) {
+    console.log('Error en el archivo: request.service.ts');
+    console.log(title, '\n\t', environment.showErrors ? error : '');
   }
 }

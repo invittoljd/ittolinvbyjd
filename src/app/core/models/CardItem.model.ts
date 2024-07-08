@@ -4,10 +4,10 @@ export interface CardItemModel {
   loan?: boolean,
   date?: number,
   batch?: number,
-  inventory?: number,
+  inventory?: string,
   niu?: string,
-  serial?: number,
-  manager?: number,
+  serial?: string,
+  manager?: string,
   src?: String
   title: String,
   information: String,

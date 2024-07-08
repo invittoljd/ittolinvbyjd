@@ -6,6 +6,7 @@ export const environment = {
   // Developer Mode
   // url: 'http://localhost:3000',
   // Production Mode
+  showErrors: false,
   url: 'https://ittolinvbyjdbackend.vercel.app',
   tokenName: 'token_session',
   typeAdmin: 1,
